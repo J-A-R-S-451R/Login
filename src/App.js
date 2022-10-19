@@ -45,27 +45,6 @@ const router = createHashRouter([
   }
 ]);
 
-/* import {
-  createRoutesFromElements,
-  createBrowserRouter,
-  Route,
-  RouterProvider,
-} from "react-router-dom";
-
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route
-      path="/"
-      element={<DashboardPage fundraisers={[{id: 1, title: "Billy bob's fundraiser", description: "this is the description."}, {id: 2, title: "The second bob's fundraiser", description: "this is the description for the other fundraiser."}]} />}
-    >
-        <Route
-          path="fundraisers/:id"
-          element={<FundraiserPage />}
-        />
-    </Route>
-  )
-); */
-
 function Root() {
   return (
     <div className="root">
