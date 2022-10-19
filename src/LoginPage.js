@@ -1,85 +1,75 @@
 import './LoginPage.css';
-import { Card, CardContent, Input, Typography, CardActions } from '@mui/material';
+import { Card, CardContent, Input, Typography, CardActions, Button } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
-import React from 'react';
+import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
-class LoginPage extends React.Component {
-  constructor(props) {
-    super(props);
+function LoginPage() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
 
-    this.state = {
-      username: "",
-      password: "",
-      loading: false,
-      showErrorMessage: false
-    };
-  }
+  const navigate = useNavigate();
 
-  _onUsernameUpdate(e) {
-    this.setState({
-      "username": e.target.value
-    });
-  }
-
-  _onPasswordUpdate(e) {
-    this.setState({
-      "password": e.target.value
-    });
-  }
-
-  render() {
     return (
       <div className="login-page">
         <Card className="login-page-card">
           <CardContent>
-            <Typography gutterBottom={true} variant="h6" align="left">Login to Fundraiser 9000</Typography>
+            <Typography gutterBottom={true} variant="h6" align="left">Login to JARS Fundraiser</Typography>
             <Typography
               gutterBottom={true}
               variant="h9"
               color={"red"}
               align="left"
-              visibility={this.state.showErrorMessage ? "visible" : "hidden"}
+              visibility={showErrorMessage ? "visible" : "hidden"}
             >Your credentials are incorrect.</Typography>
 
             <Input
               className="login-page-username"
-              onChange={(e)=>this._onUsernameUpdate(e)}
+              onChange={(e)=>setUsername(e.target.value)}
               type="text"
               placeholder="Username"
-              value={this.state.username}
-              readOnly={this.state.loading}
-              sx={{marginBottom: "40px"}}
+              value={username}
+              readOnly={loading}
+              sx={{marginBottom: "40px", width: "90%"}}
             ></Input>
             <br></br>
             <Input
               className="login-page-password"
-              onChange={(e)=>this._onPasswordUpdate(e)}
+              onChange={(e)=>setPassword(e.target.value)}
               type="password"
               placeholder="Password"
-              value={this.state.password}
-              readOnly={this.state.loading}
+              value={password}
+              readOnly={loading}
+              sx={{width: "90%"}}
             ></Input>
           </CardContent>
-          <CardActions>
+          <CardActions className="login-actions">
               <LoadingButton
-                onClick={()=>this.tryLogin()}
+                onClick={()=>tryLogin()}
                 className="login-page-login-button"
                 variant="contained"
-                loading={this.state.loading}>
+                loading={loading}>
                   Login
               </LoadingButton>
+              <Button
+                onClick={()=>navigate("/signup")}
+                variant="outline">
+                  Register
+              </Button>
             </CardActions>
         </Card>
       </div>
     );
-  }
 
-  async tryLogin() {
-    this.setState({loading: true});
+  async function tryLogin() {
+    setLoading(true);
+    setShowErrorMessage(false);
 
     let loginPayload = JSON.stringify({
-      "username": this.state.username,
-      "password": this.state.password
+      "username": username,
+      "password": password
     });
 
     try {
@@ -95,9 +85,10 @@ class LoginPage extends React.Component {
   
       response.json();
     } catch (err) {
-      this.setState({loading: false, showErrorMessage: true});
+      setLoading(false);
+      setShowErrorMessage(true);
     }
-    
+
   
   }
 }

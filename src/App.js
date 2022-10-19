@@ -3,10 +3,13 @@ import LoginPage from './LoginPage';
 import FundraiserCard from './FundraiserCard';
 import { Drawer, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider, List } from '@mui/material';
 import InboxIcon from '@mui/icons-material/MoveToInbox'
+import SignupPage from './Signup';
+import NavBar from './NavBar'
+import DashboardPage from './DashboardPage';
+import DonationModal from './DonationModal';
+import FundraiserPage from './FundraiserPage';
 
-function App() {
-  return (
-    <div className="App">
+/*
       <Drawer
         variant="permanent"
         anchor="left"
@@ -18,8 +21,7 @@ function App() {
           }
         }}
       >
-      <Divider />
-      <List>
+            <List>
         <ListItem key="1" disablePadding>
           <ListItemButton>
             <ListItemIcon>
@@ -30,8 +32,82 @@ function App() {
         </ListItem>
       </List>
       </Drawer>
-      <LoginPage></LoginPage>
-      //<FundraiserCard name="Billy's Fundraiser" description="Trying to cure cancer using only natural ingredients found in flowers and butterflies. This is a revolutionary techonology, buy in now or lose out forever."></FundraiserCard>
+
+      <DashboardPage fundraisers={[{title: "Billy bob's fundraiser", description: "this is the description."}, {title: "The second fundraiser", description: "this is the description for the other fundraiser."}]}></DashboardPage>
+
+*/
+
+
+import {
+  createHashRouter,
+  RouterProvider,
+  Outlet
+} from "react-router-dom";
+
+const router = createHashRouter([
+  {
+    path: "/",
+    element: <Root />,
+    children: [
+      {
+        path: "/",
+        element: <DashboardPage fundraisers={[{id: 1, title: "First Fundraiser", description: "this is the description."}, {id: 2, title: "The second fundraiser", description: "this is the description for the other fundraiser."}]}></DashboardPage>
+      },
+      {
+        path: "/fundraiser/:id",
+        element: <FundraiserPage></FundraiserPage>
+      },
+      {
+        path: "/login",
+        element: <LoginPage></LoginPage>
+      },
+      {
+        path: "/signup",
+        element: <SignupPage></SignupPage>
+      }
+    ]
+  },
+  {
+    path: "/fundraiser/:fundraiserId",
+    element: <FundraiserPage></FundraiserPage>
+  }
+]);
+
+/* import {
+  createRoutesFromElements,
+  createBrowserRouter,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route
+      path="/"
+      element={<DashboardPage fundraisers={[{id: 1, title: "Billy bob's fundraiser", description: "this is the description."}, {id: 2, title: "The second bob's fundraiser", description: "this is the description for the other fundraiser."}]} />}
+    >
+        <Route
+          path="fundraisers/:id"
+          element={<FundraiserPage />}
+        />
+    </Route>
+  )
+); */
+
+function Root() {
+  return (
+    <div className="root">
+      <NavBar />
+      <Outlet></Outlet>
+    </div>
+  );
+}
+
+
+function App() {
+  return (
+    <div className="App">
+      <RouterProvider router={router} />
     </div>
   );
 }

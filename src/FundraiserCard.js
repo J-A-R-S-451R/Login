@@ -1,26 +1,43 @@
-//import './FundraiserCard.css';
-import { Card, CardContent, Typography } from '@mui/material';
-import React from 'react';
+import { Card, CardContent, Typography, CardMedia, CardActions, Button, Divider } from '@mui/material';
+import { React, useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import DonationModal from './DonationModal';
 
-class FundraiserCard extends React.Component {
-  constructor(props) {
-    super(props);
+function FundraiserCard({ fundraiser }) {
+  const [modalOpen, setModalOpen] = useState(false);
 
-    this.state = {
 
-    };
+  const navigate = useNavigate();
+
+  function navigateToFundraiser() {
+    navigate("/fundraiser/" + fundraiser.id);
   }
 
-  render() {
     return (
-      <Card>
-        <CardContent>
-            <Typography align="left" variant="h5" gutterBottom="true">{this.props.name}</Typography>
-            <Typography align="left" variant="body1">{this.props.description}</Typography>
-        </CardContent>
-      </Card>
+        <Card sx={{ marginTop: "32px" }}>
+            <CardMedia
+            component="img"
+            height="240"
+            image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
+            alt="green iguana"
+            />
+            <CardContent>
+                <Typography gutterBottom variant="h5" component="div" align="center">
+                    {fundraiser.title}
+                </Typography>
+                <Typography variant="body1" color="text.secondary">
+                    {fundraiser.description}
+                </Typography>
+            </CardContent>
+            <Divider></Divider>
+            <CardActions>
+                <Button size="medium" variant="contained" onClick={()=>setModalOpen(true)}>Donate</Button>
+                <Button size="medium" onClick={navigateToFundraiser}>Learn More</Button>
+            </CardActions>
+            <DonationModal fundraiser={fundraiser} modalOpen={modalOpen} onModalClose={()=>setModalOpen(false)}></DonationModal>
+        </Card>
     );
-  }
+
 }
 
 export default FundraiserCard;
