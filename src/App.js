@@ -9,34 +9,6 @@ import DashboardPage from './DashboardPage';
 import DonationModal from './DonationModal';
 import FundraiserPage from './FundraiserPage';
 
-/*
-      <Drawer
-        variant="permanent"
-        anchor="left"
-        className="drawer"
-        PaperProps={{
-          sx: {
-            backgroundColor: "#1b2530",
-            color: "white"
-          }
-        }}
-      >
-            <List>
-        <ListItem key="1" disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <InboxIcon sx={{color: "white"}}></InboxIcon>
-            </ListItemIcon>
-            <ListItemText primary="Item 1" />
-          </ListItemButton>
-        </ListItem>
-      </List>
-      </Drawer>
-
-      <DashboardPage fundraisers={[{title: "Billy bob's fundraiser", description: "this is the description."}, {title: "The second fundraiser", description: "this is the description for the other fundraiser."}]}></DashboardPage>
-
-*/
-
 
 import {
   createHashRouter,

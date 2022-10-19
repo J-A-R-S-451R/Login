@@ -25,8 +25,8 @@ function FundraiserPage() {
                 <div style={{display: "flex", flexDirection: "row", justifyItems: "center", alignItems: "stretch", height: "100%"}}>
                     <div style={{flex: "5", padding: "32px"}}>
                         <div style={{display: "flex", flexDirection: "column"}}>
-                            <Typography variant="h4">Billy Bobs Fundraiser</Typography>
-                            <Typography variant="body1">Skkkkrrrttttt wow flutter</Typography>
+                            <Typography variant="h4">Fundraiser</Typography>
+                            <Typography variant="body1">Goal $7000</Typography>
 
                             <div style={{marginTop: "auto"}}>
                                 <BorderLinearProgress variant="determinate" value={50} />
