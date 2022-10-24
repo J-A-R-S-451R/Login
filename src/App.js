@@ -1,4 +1,5 @@
 import './App.css';
+import React from 'react';
 import LoginPage from './LoginPage';
 import FundraiserCard from './FundraiserCard';
 import { Drawer, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider, List } from '@mui/material';

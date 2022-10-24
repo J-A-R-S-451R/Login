@@ -54,7 +54,7 @@ const ResponsiveAppBar = () => {
   const navigate = useNavigate();
 
   return (
-    <AppBar position="sticky">
+    <AppBar position="sticky" style={{background:"white",color:"inherit"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <VolunteerActivismIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -147,7 +147,7 @@ const ResponsiveAppBar = () => {
                     handleCloseNavMenu();
                     navigate(page.location);
                 }}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: 'inherit', display: 'block' }}
               >
                 {page.name}
               </Button>
@@ -155,7 +155,7 @@ const ResponsiveAppBar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title="Open Profile settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>

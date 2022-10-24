@@ -17,7 +17,7 @@ function FundraiserCard({ fundraiser }) {
         <Card sx={{ marginTop: "32px" }}>
             <CardMedia
             component="img"
-            height="240"
+            height="250"
             image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
             alt="green iguana"
             />

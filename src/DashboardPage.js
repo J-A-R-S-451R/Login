@@ -15,9 +15,9 @@ function DashboardPage({ fundraisers }) {
 
   return (
       <div className="dashboard-container" style={{display: "flex", flexDirection: "column", width: "98vw", justifyContent: "center", justifyItems: "center", alignItems: "center"}}>
-        <div className="hero-header" style={{display: "flex", flowDirection: "column", justifyItems: "column", justifyContent: "center", alignItems: "center", width: "100vw", height: "300px", backgroundImage: "url(https://mymodernmet.com/wp/wp-content/uploads/2020/08/Story-Of-Flowers-Still-thumbnail.jpg)", backgroundSize: "cover"}}>
-          <Typography fontWeight={800} fontSize="32px" color="white"  sx={{textShadow: "black 1px 0 21px"}}>
-            We all must work to make the world worthy
+        <div className="hero-header" style={{display: "flex", flowDirection: "column", justifyItems: "column", justifyContent: "center", alignItems: "center", width: "100vw", height: "800px", backgroundImage: "url(https://cdn.pixabay.com/photo/2022/10/15/21/23/cat-7523894_1280.jpg)", backgroundSize: "cover"}}>
+          <Typography fontWeight={700} fontSize="45px" color= "white"  sx={{textShadow: "gray 1px 0 21px"}}>
+            It only takes you to make it possible.
           </Typography>
         </div>
 
