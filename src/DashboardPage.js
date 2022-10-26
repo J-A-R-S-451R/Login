@@ -14,7 +14,7 @@ function DashboardPage({ fundraisers }) {
   }
 
   return (
-      <div className="dashboard-container" style={{display: "flex", flexDirection: "column", width: "98vw", justifyContent: "center", justifyItems: "center", alignItems: "center"}}>
+      <div className="dashboard-container" style={{display: "flex", flexDirection: "column", width: "98vw", justifyContent: "center", justifyItems: "center", alignItems: "center", backgroundColor: '#eee'}}>
         <div className="hero-header" style={{display: "flex", flowDirection: "column", justifyItems: "column", justifyContent: "center", alignItems: "center", width: "100vw", height: "300px", backgroundImage: "url(https://mymodernmet.com/wp/wp-content/uploads/2020/08/Story-Of-Flowers-Still-thumbnail.jpg)", backgroundSize: "cover"}}>
           <Typography fontWeight={800} fontSize="32px" color="white"  sx={{textShadow: "black 1px 0 21px"}}>
             We all must work to make the world worthy

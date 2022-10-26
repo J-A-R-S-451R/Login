@@ -12,7 +12,8 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
-import { useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import "./NavBar.css";
 
 const pages = [
     {
@@ -26,10 +27,16 @@ const pages = [
     {
         name: "Register",
         location: "/signup"
+    },
+    {
+     name: "Fundraiser",
+     location: "/fundraiserType"
+
     }
 ];
 
-const settings = ['Profile', 'Account', 'Logout'];
+
+const settings = [];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -54,11 +61,13 @@ const ResponsiveAppBar = () => {
   const navigate = useNavigate();
 
   return (
-    <AppBar position="sticky">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
+<div className="AppBar">
+    <AppBar position="sticky" style={{ backgroundColor: '#eee', color: '#000000' }} >
+      <Container maxWidth="xl" >
+        <Toolbar disableGutters >
           <VolunteerActivismIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
+           style={{ color: '#000000' }}
             variant="h6"
             noWrap
             component="a"
@@ -78,8 +87,9 @@ const ResponsiveAppBar = () => {
             JARS FUNDRAISER
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }} >
             <IconButton
+            style={{ color: '#000000' }}
               size="large"
               aria-label="account of current user"
               aria-controls="menu-appbar"
@@ -90,6 +100,7 @@ const ResponsiveAppBar = () => {
               <MenuIcon />
             </IconButton>
             <Menu
+            style={{ color: '#000000' }}
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
@@ -122,6 +133,7 @@ const ResponsiveAppBar = () => {
           </Box>
           <VolunteerActivismIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
+          
             variant="h5"
             noWrap
             component="a"
@@ -142,6 +154,7 @@ const ResponsiveAppBar = () => {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
+              style={{ color: '#000000' }}
                 key={page.name}
                 onClick={()=>{
                     handleCloseNavMenu();
@@ -157,7 +170,10 @@ const ResponsiveAppBar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              <NavLink to="/profile">
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg"  />
+                </NavLink>
+                
               </IconButton>
             </Tooltip>
             <Menu
@@ -177,7 +193,7 @@ const ResponsiveAppBar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} onClick={handleCloseUserMenu} >
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
@@ -186,6 +202,7 @@ const ResponsiveAppBar = () => {
         </Toolbar>
       </Container>
     </AppBar>
+    </div>
   );
 };
 export default ResponsiveAppBar;
