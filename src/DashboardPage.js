@@ -2,7 +2,6 @@ import './DashboardPage.css'
 import { Typography } from '@mui/material';
 import React from 'react';
 import FundraiserCard from './FundraiserCard';
-import './LoginPage.css';
 
 function DashboardPage({ fundraisers }) {
   if (!fundraisers) {
