@@ -1,4 +1,4 @@
-import "./FundraiserPage.css"
+import "../css/FundraiserPage.css"
 import { LinearProgress, Paper, Typography } from '@mui/material';
 import { linearProgressClasses } from '@mui/material/LinearProgress';
 import { styled } from '@mui/material/styles';

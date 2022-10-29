@@ -1,4 +1,4 @@
-import './DashboardPage.css'
+import '../css/DashboardPage.css'
 import { Typography } from '@mui/material';
 import React from 'react';
 import FundraiserCard from './FundraiserCard';

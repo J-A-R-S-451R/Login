@@ -1,9 +1,9 @@
-import './App.css';
-import DashboardPage from './DashboardPage';
-import FundraiserPage from './FundraiserPage';
-import LoginPage from './LoginPage';
-import NavBar from './NavBar';
-import SignupPage from './SignupPage';
+import './css/App.css';
+import DashboardPage from './components/DashboardPage';
+import FundraiserPage from './components/FundraiserPage';
+import LoginPage from './components/LoginPage';
+import NavBar from './components/NavBar';
+import SignupPage from './components/SignupPage';
 
 
 import {
