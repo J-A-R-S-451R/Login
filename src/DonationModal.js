@@ -1,9 +1,9 @@
 import PaymentIcon from '@mui/icons-material/Payment';
-import { Card, CardActions, FormControl, Input, InputAdornment, InputLabel } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
+import { Card, CardActions, InputAdornment, TextField } from '@mui/material';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
-import { useState } from 'react';
 
 const style = {
   position: 'absolute',
@@ -18,10 +18,6 @@ const style = {
 };
 
 function DonationModal({ inputDonorName, modalOpen, onModalClose, fundraiser }) {
-  const [donationAmount, setDonationAmount] = useState("1.00");
-  const [creditCardNumber, setCreditCardNumber] = useState("");
-  const [donorName, setDonorName] = useState(inputDonorName ?? "");
-
     return (
       <div>
         <Modal
@@ -36,45 +32,54 @@ function DonationModal({ inputDonorName, modalOpen, onModalClose, fundraiser }) 
               Donate to {fundraiser.title}
             </Typography>
 
-            <FormControl fullWidth sx={{ m: 1 }} variant="standard">
-              <InputLabel htmlFor="standard-adornment-amount">Amount</InputLabel>
-              <Input
+            <form> 
+              <TextField
                 id="standard-adornment-amount"
-                value={donationAmount}
-                onChange={(e)=>setDonationAmount(e.target.value)}
+                margin="normal"
+                required
+                fullWidth
                 name="donationAmount"
-                startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                label="Amount"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      $
+                    </InputAdornment>
+                  ),
+                }}
+                variant="standard"
               />
-            </FormControl>
 
-            <FormControl fullWidth sx={{ m: 1 }} variant="standard">
-              <InputLabel htmlFor="standard-adornment-amount">Name</InputLabel>
-              <Input
-                id="standard-adornment-amount"
-                value={donorName}
-                onChange={(e)=>setDonorName(e.target.value)}
+              <TextField
+                margin="normal"
+                required
+                fullWidth
                 name="donorName"
+                label="Name"
+                id="donorName"
+                autoComplete="given-name"
+                variant="standard"
               />
-            </FormControl>
 
-            <FormControl fullWidth sx={{ m: 1 }} variant="standard">
-              <InputLabel htmlFor="standard-adornment-amount">Credit Card Number</InputLabel>
-              <Input
-                id="standard-adornment-amount"
-                value={creditCardNumber}
-                onChange={(e)=>setCreditCardNumber(e.target.value)}
+              <TextField
+                margin="normal"
+                required
+                fullWidth
                 name="creditCardNumber"
+                label="Credit Card Number"
+                id="creditCardNumber"
+                variant="standard"
               />
-            </FormControl>
 
+              <Typography id="modal-modal-description" variant="body2" sx={{ mt: 2 }}>
+                  Thank you for contributing to the cause
+              </Typography>
 
-            <Typography id="modal-modal-description" variant="body2" sx={{ mt: 2 }}>
-              Thank you for contributing to the cause
-            </Typography>
-            <CardActions>
-            <Button size="medium" variant="contained">Donate</Button>
-            <Button size="medium" onClick={onModalClose}>Cancel</Button>
-          </CardActions>
+              <CardActions>
+                <LoadingButton type="submit" size="medium" variant="contained">Donate</LoadingButton>
+                <Button size="medium" onClick={onModalClose}>Cancel</Button>
+              </CardActions>
+            </form>
           </Card>
         </Modal>
       </div>
