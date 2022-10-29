@@ -1,19 +1,13 @@
 import './App.css';
-import LoginPage from './LoginPage';
-import FundraiserCard from './FundraiserCard';
-import { Drawer, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider, List } from '@mui/material';
-import InboxIcon from '@mui/icons-material/MoveToInbox'
-import SignupPage from './Signup';
-import NavBar from './NavBar'
 import DashboardPage from './DashboardPage';
-import DonationModal from './DonationModal';
 import FundraiserPage from './FundraiserPage';
+import LoginPage from './LoginPage';
+import NavBar from './NavBar';
+import SignupPage from './Signup';
 
 
 import {
-  createHashRouter,
-  RouterProvider,
-  Outlet
+  createHashRouter, Outlet, RouterProvider
 } from "react-router-dom";
 
 const router = createHashRouter([
@@ -39,10 +33,6 @@ const router = createHashRouter([
       }
     ]
   },
-  {
-    path: "/fundraiser/:fundraiserId",
-    element: <FundraiserPage></FundraiserPage>
-  }
 ]);
 
 function Root() {

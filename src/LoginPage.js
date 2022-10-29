@@ -1,8 +1,8 @@
-import './LoginPage.css';
-import { Card, CardContent, Input, Typography, CardActions, Button } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
+import { Button, Card, CardActions, CardContent, Input, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import './LoginPage.css';
 
 function LoginPage() {
   const [username, setUsername] = useState("");

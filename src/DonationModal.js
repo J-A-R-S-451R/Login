@@ -1,11 +1,9 @@
-import { useState } from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
 import PaymentIcon from '@mui/icons-material/Payment';
-import { FormControl, InputLabel, Input, InputAdornment, Card, CardActions } from '@mui/material';
-import { textAlign } from '@mui/system';
+import { Card, CardActions, FormControl, Input, InputAdornment, InputLabel } from '@mui/material';
+import Button from '@mui/material/Button';
+import Modal from '@mui/material/Modal';
+import Typography from '@mui/material/Typography';
+import { useState } from 'react';
 
 const style = {
   position: 'absolute',
@@ -20,7 +18,6 @@ const style = {
 };
 
 function DonationModal({ inputDonorName, modalOpen, onModalClose, fundraiser }) {
-  //const [modalOpen, setModalOpen] = useState(false);
   const [donationAmount, setDonationAmount] = useState("1.00");
   const [creditCardNumber, setCreditCardNumber] = useState("");
   const [donorName, setDonorName] = useState(inputDonorName ?? "");

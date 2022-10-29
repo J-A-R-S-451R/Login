@@ -1,9 +1,7 @@
-//import './FundraiserCard.css';
-import { Card, CardContent, Typography, CardMedia, CardActions, Button, Divider, Paper, LinearProgress } from '@mui/material';
-import { minHeight } from '@mui/system';
-import React from 'react';
-import { styled } from '@mui/material/styles';
+import { LinearProgress, Paper, Typography } from '@mui/material';
 import { linearProgressClasses } from '@mui/material/LinearProgress';
+import { styled } from '@mui/material/styles';
+import React from 'react';
 import RecentDonations from './RecentDonations';
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({

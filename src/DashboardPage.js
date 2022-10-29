@@ -1,14 +1,9 @@
-import './LoginPage.css';
-import { Card, CardContent, Input, Typography, CardActions, Box } from '@mui/material';
-import LoadingButton from '@mui/lab/LoadingButton';
-import React, { useState } from 'react';
+import { Typography } from '@mui/material';
+import React from 'react';
 import FundraiserCard from './FundraiserCard';
+import './LoginPage.css';
 
 function DashboardPage({ fundraisers }) {
-/*   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [showErrorMessage, setShowErrorMessage] = useState(false); */
   if (!fundraisers) {
     fundraisers = []
   }

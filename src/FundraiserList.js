@@ -1,5 +1,4 @@
 import React from 'react';
-import { Card, Input, Typography } from '@mui/material';
 import FundraiserCard from './FundraiserCard';
 
 function FundraiserList({ fundraisers }) {
