@@ -31,7 +31,9 @@ function FundraiserPage() {
                             </div>
 
                             <div className="progress-bar-container">
-                                Progress: $325 out of $500
+                                <Typography variant="body1">
+                                    Progress: $325 out of $500
+                                </Typography>
                                 <BorderLinearProgress className="progress-bar" variant="determinate" value={50} />
                             </div>
                         </div>
