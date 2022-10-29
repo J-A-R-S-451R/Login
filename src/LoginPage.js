@@ -1,75 +1,32 @@
-import LoadingButton from '@mui/lab/LoadingButton';
-import { Button, Card, CardActions, CardContent, Input, Typography } from '@mui/material';
-import { useState } from 'react';
-import { useNavigate } from "react-router-dom";
-import './LoginPage.css';
+import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import { useNavigate } from 'react-router-dom';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { LoadingButton } from '@mui/lab';
 
-function LoginPage() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [showErrorMessage, setShowErrorMessage] = useState(false);
+export default function LoginPage() {
+  const [loading, setLoading] = React.useState(false);
+  const [showErrorMessage, setShowErrorMessage] = React.useState(false);
 
   const navigate = useNavigate();
 
-    return (
-      <div className="login-page">
-        <Card className="login-page-card">
-          <CardContent>
-            <Typography gutterBottom={true} variant="h6" align="left">Login to JARS Fundraiser</Typography>
-            <Typography
-              gutterBottom={true}
-              variant="h9"
-              color={"red"}
-              align="left"
-              visibility={showErrorMessage ? "visible" : "hidden"}
-            >Your credentials are incorrect.</Typography>
+  async function tryLogin(event) {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
 
-            <Input
-              className="login-page-username"
-              onChange={(e)=>setUsername(e.target.value)}
-              type="text"
-              placeholder="Username"
-              value={username}
-              readOnly={loading}
-              sx={{marginBottom: "40px", width: "90%"}}
-            ></Input>
-            <br></br>
-            <Input
-              className="login-page-password"
-              onChange={(e)=>setPassword(e.target.value)}
-              type="password"
-              placeholder="Password"
-              value={password}
-              readOnly={loading}
-              sx={{width: "90%"}}
-            ></Input>
-          </CardContent>
-          <CardActions className="login-actions">
-              <LoadingButton
-                onClick={()=>tryLogin()}
-                className="login-page-login-button"
-                variant="contained"
-                loading={loading}>
-                  Login
-              </LoadingButton>
-              <Button
-                onClick={()=>navigate("/signup")}
-                variant="outline">
-                  Register
-              </Button>
-            </CardActions>
-        </Card>
-      </div>
-    );
-
-  async function tryLogin() {
     setLoading(true);
     setShowErrorMessage(false);
 
     let loginPayload = JSON.stringify({
-      "username": username,
-      "password": password
+      "username": data.get("username"),
+      "password": data.get("password")
     });
 
     try {
@@ -88,9 +45,72 @@ function LoginPage() {
       setLoading(false);
       setShowErrorMessage(true);
     }
-
-  
   }
+  
+  return (
+      <Container component="main" maxWidth="sm">
+        <Card
+          sx={{
+            marginTop: 8,
+            padding: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <Typography variant="body1" sx={{color: "red"}} visibility={showErrorMessage ? "visible" : "hidden" }>
+            The credentials you entered are incorrect.
+          </Typography>
+          <Box component="form" onSubmit={tryLogin} sx={{ mt: 1 }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="username"
+              label="Username"
+              name="username"
+              autoComplete="email"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <LoadingButton
+              type="submit"
+              fullWidth
+              variant="contained"
+              loading={loading}
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign In
+            </LoadingButton>
+            <Grid container>
+              <Grid item xs>
+                <Button>
+                  Forgot password?
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button onClick={()=>navigate("/signup")}>
+                  Sign Up
+                </Button>
+              </Grid>
+            </Grid>
+          </Box>
+        </Card>
+      </Container>
+  );
 }
-
-export default LoginPage;

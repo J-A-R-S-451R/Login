@@ -3,7 +3,7 @@ import DashboardPage from './DashboardPage';
 import FundraiserPage from './FundraiserPage';
 import LoginPage from './LoginPage';
 import NavBar from './NavBar';
-import SignupPage from './Signup';
+import SignupPage from './SignupPage';
 
 
 import {
