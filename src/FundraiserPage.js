@@ -26,9 +26,12 @@ function FundraiserPage() {
                             <Typography variant="h4">Fundraiser</Typography>
                             <Typography variant="body1">Goal $7000</Typography>
 
+
                             <div style={{marginTop: "auto"}}>
                                 <BorderLinearProgress variant="determinate" value={50} />
                             </div>
+
+                            <Typography variant="body1">This is a fundraiser description.</Typography>
                         </div>
 
                     </div>

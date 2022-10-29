@@ -18,7 +18,7 @@ function FundraiserCard({ fundraiser }) {
             <CardMedia
             component="img"
             height="240"
-            image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
+            image="https://thsblog.s3.amazonaws.com/wp-content/uploads/2019/10/13222121/how_to_sell_fundraiser_tickets_online.jpg"
             alt="green iguana"
             />
             <CardContent>

@@ -39,8 +39,11 @@ export default function LoginPage() {
         },
         credentials: "include"
       });
-  
+
+      navigate("/");
       response.json();
+
+
     } catch (err) {
       setLoading(false);
       setShowErrorMessage(true);
