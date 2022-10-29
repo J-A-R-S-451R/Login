@@ -8,20 +8,13 @@ import NavBar from './NavBar'
 import DashboardPage from './DashboardPage';
 import DonationModal from './DonationModal';
 import FundraiserPage from './FundraiserPage';
-import FundraiserType from './FundraiserType';
 
 
 import {
   createHashRouter,
   RouterProvider,
-  Outlet,
-  Route
+  Outlet
 } from "react-router-dom";
-import Profile from './Profile';
-import Medical from './Donation/Medical';
-
-
-
 
 const router = createHashRouter([
   {
@@ -30,7 +23,7 @@ const router = createHashRouter([
     children: [
       {
         path: "/",
-        element: <DashboardPage fundraisers={[{}]}></DashboardPage>
+        element: <DashboardPage fundraisers={[{id: 1, title: "First Fundraiser", description: "this is the description."}, {id: 2, title: "The second fundraiser", description: "this is the description for the other fundraiser."}]}></DashboardPage>
       },
       {
         path: "/fundraiser/:id",
@@ -43,23 +36,7 @@ const router = createHashRouter([
       {
         path: "/signup",
         element: <SignupPage></SignupPage>
-      },
-      {
-        path: "/fundraiserType",
-        element:<FundraiserType></FundraiserType>
-
-      },
-      {
-        path: "/profile",
-        element:<Profile></Profile>
-      },
-      {
-        path: "/medical",
-        element:<Medical></Medical>
       }
-
-
-
     ]
   },
   {
@@ -72,7 +49,6 @@ function Root() {
   return (
     <div className="root">
       <NavBar />
-  
       <Outlet></Outlet>
     </div>
   );

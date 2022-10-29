@@ -13,8 +13,7 @@ function LoginPage() {
   const navigate = useNavigate();
 
     return (
-      
-      <div className="login-page" >
+      <div className="login-page">
         <Card className="login-page-card">
           <CardContent>
             <Typography gutterBottom={true} variant="h6" align="left">Login to JARS Fundraiser</Typography>
