@@ -160,7 +160,6 @@ function useCurrentUser() {
         setCurrentUser(newUser);
     }
 
-    let i = Math.floor(Math.random() * 100)
     useEffect(() => {
         registerCurrentUserListener(onUserChange);
         
