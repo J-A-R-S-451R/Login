@@ -12,8 +12,11 @@ import Container from '@mui/material/Container';
 import { LoadingButton } from '@mui/lab';
 
 export default function LoginPage() {
+  const GENERIC_LOGIN_FAILURE = "Something went wrong while trying to sign in. Try again.";
+
   const [loading, setLoading] = React.useState(false);
   const [showErrorMessage, setShowErrorMessage] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState(GENERIC_LOGIN_FAILURE);
 
   const navigate = useNavigate();
 
@@ -35,19 +38,30 @@ export default function LoginPage() {
         mode: "cors",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Basic " + window.btoa(loginPayload)
         },
-        credentials: "include"
+        credentials: "include",
+        body: loginPayload,
       });
 
+      const responseJson = await response.json();
+      if (!response.ok) {
+        displayError(responseJson["errorMessage"]);
+        return;
+      }
+
       navigate("/");
-      response.json();
-
-
     } catch (err) {
-      setLoading(false);
-      setShowErrorMessage(true);
+      displayError();
     }
+  }
+
+  function displayError(errorMessage) {
+    if (!errorMessage) {
+      errorMessage = GENERIC_LOGIN_FAILURE;
+    }
+    setErrorMessage(errorMessage);
+    setShowErrorMessage(true);
+    setLoading(false);
   }
   
   return (
@@ -68,7 +82,7 @@ export default function LoginPage() {
             Sign in
           </Typography>
           <Typography variant="body1" sx={{color: "red"}} visibility={showErrorMessage ? "visible" : "hidden" }>
-            The credentials you entered are incorrect.
+            {errorMessage}
           </Typography>
           <Box component="form" onSubmit={tryLogin} sx={{ mt: 1 }}>
             <TextField

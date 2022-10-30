@@ -12,8 +12,11 @@ import { useNavigate } from 'react-router-dom';
 import { LoadingButton } from '@mui/lab';
 
 export default function SignupPage() {
+  const GENERIC_SIGNUP_FAILURE = "Something wen't wrong while creating your account. Try again."
+
   const [loading, setLoading] = React.useState(false);
   const [showErrorMessage, setShowErrorMessage] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState(GENERIC_SIGNUP_FAILURE);
 
   const navigate = useNavigate();
 
@@ -41,12 +44,26 @@ export default function SignupPage() {
         credentials: "include",
         body: signupPayload
       });
-  
-      response.json();
+      
+      const responseJson = await response.json();
+      if (!response.ok) {
+        displayError(responseJson["errorMessage"]);
+        return;
+      }
+
+      navigate("/");
     } catch (err) {
-      setLoading(false);
-      setShowErrorMessage(true);
+      displayError();
     }
+  }
+
+  function displayError(errorMessage) {
+    if (!errorMessage) {
+      errorMessage = GENERIC_SIGNUP_FAILURE;
+    }
+    setErrorMessage(errorMessage);
+    setShowErrorMessage(true);
+    setLoading(false);
   }
 
   return (
@@ -67,7 +84,7 @@ export default function SignupPage() {
             Sign up
           </Typography>
           <Typography variant="body1" sx={{color: "red"}} visibility={showErrorMessage ? "visible" : "hidden" }>
-            There was a problem creating your account. Try again.
+            {errorMessage}
           </Typography>
           <Box component="form" onSubmit={trySignup} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
