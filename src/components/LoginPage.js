@@ -10,6 +10,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { LoadingButton } from '@mui/lab';
+import { login } from '../js/FundraiserAPI';
 
 export default function LoginPage() {
   const GENERIC_LOGIN_FAILURE = "Something went wrong while trying to sign in. Try again.";
@@ -27,25 +28,13 @@ export default function LoginPage() {
     setLoading(true);
     setShowErrorMessage(false);
 
-    let loginPayload = JSON.stringify({
-      "username": data.get("username"),
-      "password": data.get("password")
-    });
-
     try {
-      let response = await fetch('https://jarsfundraiser.azurewebsites.net/Fundraiser/LoginUser', {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: loginPayload,
-      });
+      let username = data.get("username");
+      let password = data.get("password");
 
-      const responseJson = await response.json();
-      if (!response.ok) {
-        displayError(responseJson["errorMessage"]);
+      const response = await login(username, password);
+      if (!response.success) {
+        displayError(response.errorMessage);
         return;
       }
 

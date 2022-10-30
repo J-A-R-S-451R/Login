@@ -13,6 +13,8 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import { useNavigate } from "react-router-dom";
+import { logout, useCurrentUser } from '../js/FundraiserAPI';
+import PersonIcon from '@mui/icons-material/Person';
 
 const pages = [
     {
@@ -29,12 +31,23 @@ const pages = [
     }
 ];
 
-const settings = ['Profile', 'Account', 'Logout'];
+const settings = [
+  {
+    name: "Profile",
+  },
+  {
+    name: "Account",
+  },
+  {
+    name: "Logout",
+    callback: logout
+  }
+];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  const currentUser = useCurrentUser();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -157,7 +170,9 @@ const ResponsiveAppBar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar>
+                  {currentUser?.firstName[0]?.toUpperCase() ?? <PersonIcon />}
+                </Avatar>
               </IconButton>
             </Tooltip>
             <Menu
@@ -177,8 +192,13 @@ const ResponsiveAppBar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <MenuItem key={setting.name}
+                  onClick={()=>{
+                    if (setting.callback) setting.callback();
+                    handleCloseUserMenu();
+                  }}
+                >
+                  <Typography textAlign="center">{setting.name}</Typography>
                 </MenuItem>
               ))}
             </Menu>

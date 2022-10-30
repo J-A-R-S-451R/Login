@@ -10,8 +10,9 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useNavigate } from 'react-router-dom';
 import { LoadingButton } from '@mui/lab';
+import { signUp } from '../js/FundraiserAPI';
 
-export default function SignupPage() {
+function SignupPage() {
   const GENERIC_SIGNUP_FAILURE = "Something wen't wrong while creating your account. Try again."
 
   const [loading, setLoading] = React.useState(false);
@@ -27,27 +28,16 @@ export default function SignupPage() {
     setLoading(true);
     setShowErrorMessage(false);
 
-    let signupPayload = JSON.stringify({
-      "username": data.get("username"),
-      "password": data.get("password"),
-      "firstName": data.get("firstName"),
-      "lastName": data.get("lastName")
-    });
-
     try {
-      let response = await fetch('https://jarsfundraiser.azurewebsites.net/Fundraiser/AddUser', {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: signupPayload
-      });
+      let username = data.get("username");
+      let password = data.get("password");
+      let firstName = data.get("firstName");
+      let lastName = data.get("lastName");
+
+      let response = await signUp(username, password, firstName, lastName);
       
-      const responseJson = await response.json();
-      if (!response.ok) {
-        displayError(responseJson["errorMessage"]);
+      if (!response.success) {
+        displayError(response.errorMessage);
         return;
       }
 
@@ -154,3 +144,5 @@ export default function SignupPage() {
       </Container>
   );
 }
+
+export default SignupPage;
