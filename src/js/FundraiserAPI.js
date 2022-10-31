@@ -108,6 +108,11 @@ async function refreshCachedCurrentUser() {
     return currentUser;
 }
 
+async function getAllFundraisers() {
+    const fundraisers = await sendRequest("GET", "GetAllFundraisers");
+    return fundraisers;
+}
+
 function storeCurrentUser(session) {
     localStorage.setItem("userProfile", JSON.stringify(session));
 }
@@ -171,4 +176,4 @@ function useCurrentUser() {
     return currentUser;
 }
 
-export { useCurrentUser, login, signUp, logout };
+export { useCurrentUser, login, signUp, logout, getAllFundraisers };
