@@ -23,7 +23,7 @@ function FundraiserCard({ fundraiser }) {
             />
             <CardContent>
                 <Typography gutterBottom variant="h5" component="div" align="center">
-                    {fundraiser.title}
+                    {fundraiser.name}
                 </Typography>
                 <Typography variant="body1" color="text.secondary">
                     {fundraiser.description}

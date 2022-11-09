@@ -113,6 +113,11 @@ async function getAllFundraisers() {
     return fundraisers;
 }
 
+async function getFundraiser(fundraiserId) {
+    const fundraiser = await sendRequest("GET", "GetFundraiser?fundraiserId=" + fundraiserId);
+    return fundraiser;
+}
+
 function storeCurrentUser(session) {
     localStorage.setItem("userProfile", JSON.stringify(session));
 }
@@ -176,4 +181,4 @@ function useCurrentUser() {
     return currentUser;
 }
 
-export { useCurrentUser, login, signUp, logout, getAllFundraisers };
+export { useCurrentUser, login, signUp, logout, getAllFundraisers, getFundraiser };

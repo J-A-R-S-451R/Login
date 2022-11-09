@@ -1,9 +1,11 @@
 import "../css/FundraiserPage.css"
-import { LinearProgress, Paper, Typography } from '@mui/material';
+import { CircularProgress, LinearProgress, Paper, Typography } from '@mui/material';
 import { linearProgressClasses } from '@mui/material/LinearProgress';
 import { styled } from '@mui/material/styles';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import RecentDonations from './RecentDonations';
+import { useParams } from "react-router-dom";
+import { getFundraiser } from "../js/FundraiserAPI";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     height: 10,
@@ -18,24 +20,48 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   }));
 
 function FundraiserPage() {
+    const { fundraiserId } = useParams();
+    const [fundraiser, setFundraiser] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    async function loadFundraiser() {
+      const result = await getFundraiser(fundraiserId);
+      setFundraiser(result);
+      setLoading(false);
+    }
+  
+    useEffect(() => {
+      loadFundraiser();
+    }, []);
+
     return (
         <div className="donation-page">
             <Paper className="paper-container">
                 <div className="page-contents">
                     <div className="content-column">
                         <div className="content-area">
-                            <div className="fundraiser-details">
-                                <Typography variant="h4">Fundraiser</Typography>
-                                <Typography variant="body1">Goal $7000</Typography>
-                                <Typography variant="body1">This is a fundraiser description.</Typography>
-                            </div>
+                            {loading ? (
+                                <CircularProgress variant="indeterminate"></CircularProgress>
+                            ) : (
+                                <>
+                                    <div className="fundraiser-details">
+                                        <Typography variant="h4">{fundraiser.name}</Typography>
+                                        <Typography variant="body1">{fundraiser.description}</Typography>
+                                    </div>
 
-                            <div className="progress-bar-container">
-                                <Typography variant="body1">
-                                    Progress: $325 out of $500
-                                </Typography>
-                                <BorderLinearProgress className="progress-bar" variant="determinate" value={50} />
-                            </div>
+                                    <div className="progress-bar-container">
+                                        <Typography variant="body1">
+                                            Progress: ${fundraiser.donationTotal} out of ${fundraiser.goal}
+                                        </Typography>
+
+                                        <BorderLinearProgress
+                                            className="progress-bar"
+                                            variant="determinate"
+                                            value={(fundraiser.donationTotal / fundraiser.goal) * 100}
+                                        />
+                                    </div>
+                                </>
+                            )}
                         </div>
                     </div>
                     <RecentDonations className="recent-donations-column"></RecentDonations>

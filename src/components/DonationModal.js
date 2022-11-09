@@ -29,7 +29,7 @@ function DonationModal({ inputDonorName, modalOpen, onModalClose, fundraiser }) 
           <Card sx={style}>
             <PaymentIcon sx={{fontSize: "64px", backgroundColor: "#1976d2", padding: "8px", borderRadius: "100%", color: "white"}}></PaymentIcon>
             <Typography id="modal-modal-title" variant="h6" component="h2">
-              Donate to {fundraiser.title}
+              Donate to {fundraiser.name}
             </Typography>
 
             <form> 

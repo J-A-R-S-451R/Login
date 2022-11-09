@@ -1,12 +1,22 @@
 import '../css/DashboardPage.css'
-import { Typography } from '@mui/material';
-import React from 'react';
+import { CircularProgress, Typography } from '@mui/material';
+import React, { useState, useEffect } from 'react';
 import FundraiserCard from './FundraiserCard';
+import { getAllFundraisers } from '../js/FundraiserAPI';
 
-function DashboardPage({ fundraisers }) {
-  if (!fundraisers) {
-    fundraisers = []
+function DashboardPage() {
+  const [fundraisers, setFundraisers] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  async function loadFundraisers() {
+    const result = await getAllFundraisers();
+    setFundraisers(result);
+    setLoading(false);
   }
+
+  useEffect(() => {
+    loadFundraisers();
+  }, []);
 
   return (
       <div className="dashboard-container">
@@ -16,11 +26,18 @@ function DashboardPage({ fundraisers }) {
           </Typography>
         </div>
 
-        <div className="fundraiser-cards">
-            {fundraisers.map(x => {
-                return <FundraiserCard fundraiser={x}></FundraiserCard>
-            })}
-        </div>
+        {
+          loading ? (
+            <CircularProgress variant="indeterminate" sx={{mt: "16px"}}></CircularProgress>
+          )
+          : (
+            <div className="fundraiser-cards">
+              {fundraisers.map(x => {
+                  return <FundraiserCard fundraiser={x}></FundraiserCard>
+              })}
+            </div>
+          )
+        }
       </div>
   );
 }

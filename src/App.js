@@ -4,7 +4,7 @@ import FundraiserPage from './components/FundraiserPage';
 import LoginPage from './components/LoginPage';
 import NavBar from './components/NavBar';
 import SignupPage from './components/SignupPage';
-
+import DonatePage from './components/DonatePage';
 
 import {
   createHashRouter, Outlet, RouterProvider
@@ -20,7 +20,7 @@ const router = createHashRouter([
         element: <DashboardPage fundraisers={[{id: 1, title: "First Fundraiser", description: "this is the description."}, {id: 2, title: "The second fundraiser", description: "this is the description for the other fundraiser."}]}></DashboardPage>
       },
       {
-        path: "/fundraiser/:id",
+        path: "/fundraiser/:fundraiserId",
         element: <FundraiserPage></FundraiserPage>
       },
       {
@@ -30,6 +30,10 @@ const router = createHashRouter([
       {
         path: "/signup",
         element: <SignupPage></SignupPage>
+      },
+      {
+        path: "/donate/:fundraiserId",
+        element: <DonatePage></DonatePage>
       }
     ]
   },
