@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Grid from '@mui/material/Grid';
-import { Card, CardActions, Container, Divider, OutlinedInput } from '@mui/material';
+import { Card, Container } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -11,7 +11,7 @@ import Radio from '@mui/material/Radio';
 import Button from '@mui/material/Button';
 import { LoadingButton } from '@mui/lab';
 import { useNavigate, useParams } from 'react-router-dom'
-import { InputAdornment, InputLabel, Input } from '@mui/material';
+import { InputAdornment } from '@mui/material';
 import { useState } from 'react';
 import { sendDonation } from '../js/FundraiserAPI';
 
@@ -27,7 +27,7 @@ export default function DonatePage() {
     }
 
     function paymentIsCreditCard() {
-        return paymentType == "credit_card";
+        return paymentType === "credit_card";
     }
 
     async function submitDonation(event) {
@@ -52,10 +52,10 @@ export default function DonatePage() {
             fundraiserId: fundraiserId,
         };
 
-        if (paymentType == "credit_card") {
+        if (paymentType === "credit_card") {
             donation.creditCardNumber = data.get("accountNumber");
             donation.cvv = data.get("cvv");
-        } else if (paymentType == "bank_account") {
+        } else if (paymentType === "bank_account") {
             donation.bankAccountNumber = data.get("accountNumber");
         }
 
