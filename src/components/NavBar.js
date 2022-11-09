@@ -18,25 +18,27 @@ import PersonIcon from '@mui/icons-material/Person';
 
 const pages = [
     {
-        name: "Home",
-        location: "/"
+      name: "Home",
+      location: "/"
     },
     {
-        name: "Login",
-        location: "/login"
+      name: "Login",
+      location: "/login"
     },
     {
-        name: "Register",
-        location: "/signup"
+      name: "Register",
+      location: "/signup"
+    },
+    {
+      name: "Categories",
+      location: "/categories"
     }
 ];
 
 const settings = [
   {
     name: "Profile",
-  },
-  {
-    name: "Account",
+    location: "/profile"
   },
   {
     name: "Logout",
@@ -195,6 +197,7 @@ const ResponsiveAppBar = () => {
                 <MenuItem key={setting.name}
                   onClick={()=>{
                     if (setting.callback) setting.callback();
+                    if (setting.location) navigate(setting.location);
                     handleCloseUserMenu();
                   }}
                 >

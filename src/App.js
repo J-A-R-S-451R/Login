@@ -5,6 +5,8 @@ import LoginPage from './components/LoginPage';
 import NavBar from './components/NavBar';
 import SignupPage from './components/SignupPage';
 import DonatePage from './components/DonatePage';
+import Profile from './components/Profile';
+import FundraiserType from './components/FundraiserType';
 
 import {
   createHashRouter, Outlet, RouterProvider
@@ -34,6 +36,14 @@ const router = createHashRouter([
       {
         path: "/donate/:fundraiserId",
         element: <DonatePage></DonatePage>
+      },
+      {
+        path: "/profile",
+        element:<Profile></Profile>
+      },
+      {
+        path: "/categories",
+        element: <FundraiserType></FundraiserType>
       }
     ]
   },
