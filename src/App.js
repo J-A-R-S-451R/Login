@@ -19,7 +19,7 @@ const router = createHashRouter([
     children: [
       {
         path: "/",
-        element: <DashboardPage fundraisers={[{id: 1, title: "First Fundraiser", description: "this is the description."}, {id: 2, title: "The second fundraiser", description: "this is the description for the other fundraiser."}]}></DashboardPage>
+        element: <DashboardPage></DashboardPage>
       },
       {
         path: "/fundraiser/:fundraiserId",

@@ -64,7 +64,7 @@ function FundraiserPage() {
                             )}
                         </div>
                     </div>
-                    <RecentDonations className="recent-donations-column"></RecentDonations>
+                    <RecentDonations fundraiserId={fundraiserId} className="recent-donations-column"></RecentDonations>
                 </div>
             </Paper>
         </div>

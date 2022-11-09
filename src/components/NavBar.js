@@ -16,39 +16,10 @@ import { useNavigate } from "react-router-dom";
 import { logout, useCurrentUser } from '../js/FundraiserAPI';
 import PersonIcon from '@mui/icons-material/Person';
 
-const pages = [
-    {
-      name: "Home",
-      location: "/"
-    },
-    {
-      name: "Login",
-      location: "/login"
-    },
-    {
-      name: "Register",
-      location: "/signup"
-    },
-    {
-      name: "Categories",
-      location: "/categories"
-    }
-];
-
-const settings = [
-  {
-    name: "Profile",
-    location: "/profile"
-  },
-  {
-    name: "Logout",
-    callback: logout
-  }
-];
-
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const navigate = useNavigate();
   const currentUser = useCurrentUser();
 
   const handleOpenNavMenu = (event) => {
@@ -66,7 +37,40 @@ const ResponsiveAppBar = () => {
     setAnchorElUser(null);
   };
 
-  const navigate = useNavigate();
+  const isSignedIn = () => {
+    return currentUser !== null;
+  };
+
+  const handleProfileButtonClick = (event) => {
+    if (isSignedIn()) {
+      handleOpenUserMenu(event);
+    } else {
+      navigate("/login");
+    }
+  }
+
+
+  const pages = [
+    {
+      name: "Home",
+      location: "/"
+    },
+    {
+      name: "Categories",
+      location: "/categories"
+    }
+  ];
+
+  const settings = [
+    {
+      name: "Profile",
+      location: "/profile",
+    },
+    {
+      name: "Logout",
+      callback: logout,
+    }
+  ];
 
   return (
     <AppBar position="sticky">
@@ -77,7 +81,7 @@ const ResponsiveAppBar = () => {
             variant="h6"
             noWrap
             component="a"
-            onClick={()=>navigate("/")}
+            onClick={() => navigate("/")}
             sx={{
               ml: 0.5,
               mr: 2,
@@ -121,14 +125,14 @@ const ResponsiveAppBar = () => {
               sx={{
                 display: { xs: 'block', md: 'none' },
               }}
-            >   
+            >
               {pages.map((page) => (
                 <MenuItem
-                    key={page.name}
-                    onClick={() => {
-                        handleCloseNavMenu();
-                        navigate(page.location);
-                    }}
+                  key={page.name}
+                  onClick={() => {
+                    handleCloseNavMenu();
+                    navigate(page.location);
+                  }}
                 >
                   <Typography textAlign="center">{page.name}</Typography>
                 </MenuItem>
@@ -158,9 +162,9 @@ const ResponsiveAppBar = () => {
             {pages.map((page) => (
               <Button
                 key={page.name}
-                onClick={()=>{
-                    handleCloseNavMenu();
-                    navigate(page.location);
+                onClick={() => {
+                  handleCloseNavMenu();
+                  navigate(page.location);
                 }}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
@@ -170,12 +174,13 @@ const ResponsiveAppBar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+            <Tooltip title={isSignedIn() ? "Options" : null}>
+              <Button onClick={handleProfileButtonClick} sx={{ p: 0 }}>
                 <Avatar>
                   {currentUser?.firstName[0]?.toUpperCase() ?? <PersonIcon />}
                 </Avatar>
-              </IconButton>
+                {!isSignedIn() ? (<Typography color="white" ml>Sign in</Typography>) : null}
+              </Button>
             </Tooltip>
             <Menu
               sx={{ mt: '45px' }}
@@ -195,7 +200,7 @@ const ResponsiveAppBar = () => {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting.name}
-                  onClick={()=>{
+                  onClick={() => {
                     if (setting.callback) setting.callback();
                     if (setting.location) navigate(setting.location);
                     handleCloseUserMenu();

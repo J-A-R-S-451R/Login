@@ -99,6 +99,16 @@ async function logout() {
     triggerCurrentUserListeners();
 }
 
+async function sendDonation(donation) {
+    const result = await sendRequest("POST", "SendDonation", donation);
+    return result;
+}
+
+async function getDonations(fundraiserId) {
+    const result = await sendRequest("GET", "GetDonations?fundraiserId=" + fundraiserId);
+    return result;
+}
+
 async function refreshCachedCurrentUser() {
     const currentUser = await sendRequest("GET", "GetCurrentUser");
 
@@ -181,4 +191,13 @@ function useCurrentUser() {
     return currentUser;
 }
 
-export { useCurrentUser, login, signUp, logout, getAllFundraisers, getFundraiser };
+export {
+    useCurrentUser,
+    login,
+    signUp,
+    logout,
+    getAllFundraisers,
+    getFundraiser,
+    sendDonation,
+    getDonations
+};
