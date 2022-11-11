@@ -1,10 +1,10 @@
 import "../css/FundraiserPage.css"
-import { CircularProgress, LinearProgress, Paper, Typography } from '@mui/material';
+import { Button, CircularProgress, LinearProgress, Paper, Typography } from '@mui/material';
 import { linearProgressClasses } from '@mui/material/LinearProgress';
 import { styled } from '@mui/material/styles';
 import React, { useState, useEffect } from 'react';
 import RecentDonations from './RecentDonations';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getFundraiser } from "../js/FundraiserAPI";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
@@ -24,8 +24,19 @@ function FundraiserPage() {
     const [fundraiser, setFundraiser] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    const navigate = useNavigate();
+
+    function donateToFundraiser() {
+        navigate("/donate/" + fundraiserId);
+    }
+
+    function formatMoney(num) {
+        return num.toLocaleString("en-US", {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    }
+
     async function loadFundraiser() {
       const result = await getFundraiser(fundraiserId);
+      console.log(result);
       setFundraiser(result);
       setLoading(false);
     }
@@ -44,21 +55,28 @@ function FundraiserPage() {
                                 <CircularProgress variant="indeterminate"></CircularProgress>
                             ) : (
                                 <>
+                                    <img className="hero-image" src={fundraiser.imageUrl ?? ""}></img>
                                     <div className="fundraiser-details">
                                         <Typography variant="h4">{fundraiser.name}</Typography>
                                         <Typography variant="body1">{fundraiser.description}</Typography>
                                     </div>
 
-                                    <div className="progress-bar-container">
-                                        <Typography variant="body1">
-                                            Progress: ${fundraiser.donationTotal} out of ${fundraiser.goal}
-                                        </Typography>
+                                    <div className="bottom-bar">
+                                        <div className="progress-bar-container">
+                                            <Typography variant="body1">
+                                                Progress: ${formatMoney(fundraiser.donationTotal)} out of ${formatMoney(fundraiser.goal)}
+                                            </Typography>
 
-                                        <BorderLinearProgress
-                                            className="progress-bar"
-                                            variant="determinate"
-                                            value={(fundraiser.donationTotal / fundraiser.goal) * 100}
-                                        />
+                                            <BorderLinearProgress
+                                                className="progress-bar"
+                                                variant="determinate"
+                                                value={(fundraiser.donationTotal / fundraiser.goal) * 100}
+                                            />
+
+                                        </div>
+                                        <div className="donate-button-container">
+                                            <Button variant="contained" onClick={()=>donateToFundraiser()}>Donate</Button>
+                                        </div>
                                     </div>
                                 </>
                             )}

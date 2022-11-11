@@ -85,7 +85,7 @@ export default function DonatePage() {
             >
                 <PaymentIcon sx={{ fontSize: "64px", backgroundColor: "#1976d2", padding: "10px", borderRadius: "100%", color: "white", mb: "8px" }}></PaymentIcon>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
-                    Donate to Test Fundraiser
+                    Donate
                 </Typography>
                 <Grid container spacing={2.5} component="form" onSubmit={submitDonation}>
                     <Grid item xs={12} sm={12} sx={{textAlign: "center", mt: "24px"}}>

@@ -27,6 +27,12 @@
     height: 100%;
 }
 
+.hero-image {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+}
+
 .fundraiser-details {
     padding: 32px 32px 0px 32px;
     overflow-y: auto;
@@ -52,4 +58,17 @@
 
 .recent-donations-column {
     flex: 1;
+}
+
+.bottom-bar {
+    display: flex;
+}
+
+.progress-bar-container {
+    flex-grow: 1;
+}
+
+.donate-button-container {
+    display: flex;
+    align-items: center;
 }

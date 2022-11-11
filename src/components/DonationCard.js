@@ -16,6 +16,10 @@ function DonationCard({ donation }) {
         return `${months[parsed.getMonth()]} ${parsed.getDate()}, ${parsed.getFullYear()}`;
     }
 
+    function formatMoney(num) {
+        return num.toLocaleString("en-US", {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    }
+
     return (
         <div className="donation-card">
             <Card sx={{ maxWidth: 345, marginBottom: "6px" }} elevation={4}>
@@ -28,7 +32,7 @@ function DonationCard({ donation }) {
                 title={firstName + " " + lastName}
                 subheader={formatDate(date)}
                 action={
-                    <Typography m>{"$" + amount}</Typography>
+                    <Typography m>{"$" + formatMoney(amount)}</Typography>
                 }
             />
             <CardContent>
