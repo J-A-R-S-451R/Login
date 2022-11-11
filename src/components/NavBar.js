@@ -67,6 +67,10 @@ const ResponsiveAppBar = () => {
       location: "/profile",
     },
     {
+      name: "Create a new fundraiser",
+      location: "/new-fundraiser"
+    },
+    {
       name: "Logout",
       callback: logout,
     }

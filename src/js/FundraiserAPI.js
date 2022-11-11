@@ -128,6 +128,11 @@ async function getFundraiser(fundraiserId) {
     return fundraiser;
 }
 
+async function createFundraiser(fundraiser) {
+    const newFundraiser = await sendRequest("POST", "CreateFundraiser", fundraiser);
+    return newFundraiser;
+}
+
 function storeCurrentUser(session) {
     localStorage.setItem("userProfile", JSON.stringify(session));
 }
@@ -198,6 +203,7 @@ export {
     logout,
     getAllFundraisers,
     getFundraiser,
+    createFundraiser,
     sendDonation,
     getDonations
 };

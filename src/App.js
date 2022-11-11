@@ -7,6 +7,7 @@ import SignupPage from './components/SignupPage';
 import DonatePage from './components/DonatePage';
 import Profile from './components/Profile';
 import FundraiserType from './components/FundraiserType';
+import NewFundraiserPage from './components/NewFundraiserPage';
 
 import {
   createHashRouter, Outlet, RouterProvider
@@ -44,6 +45,10 @@ const router = createHashRouter([
       {
         path: "/categories",
         element: <FundraiserType></FundraiserType>
+      },
+      {
+        path: "/new-fundraiser/",
+        element: <NewFundraiserPage></NewFundraiserPage>
       }
     ]
   },

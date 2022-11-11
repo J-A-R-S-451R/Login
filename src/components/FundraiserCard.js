@@ -19,7 +19,7 @@ function FundraiserCard({ fundraiser }) {
             <CardMedia
                 component="img"
                 height="240"
-                image={fundraiser.imageUrl ?? "https://thsblog.s3.amazonaws.com/wp-content/uploads/2019/10/13222121/how_to_sell_fundraiser_tickets_online.jpg"}
+                image={fundraiser.imageUrl}
                 alt="green iguana"
             />
             <CardContent>
