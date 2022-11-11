@@ -22,10 +22,6 @@
     text-shadow: black 1px 0 21px;
 }
 
-.fundraiser-cards {
-    width: 50vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    justify-items: center;
+.fundraiser-card-grid {
+    width: 90vw;
 }
