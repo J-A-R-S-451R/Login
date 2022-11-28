@@ -94,6 +94,22 @@ async function signUp(username, password, firstName, lastName) {
     return sessionToken;    
 }
 
+async function updateUser(userInfo) {
+    const updateRequest = await sendRequest("POST", "UpdateUser", userInfo);
+    await refreshCachedCurrentUser();
+    triggerCurrentUserListeners();
+    return updateRequest;
+}
+
+async function updateUserPassword(newPassword) {
+    const passwordChangeRequest = {
+        password: newPassword
+    };
+
+    const request = await sendRequest("POST", "UpdateUserPassword", passwordChangeRequest);
+    return request;
+}
+
 async function logout() {
     clearCurrentUser();
     triggerCurrentUserListeners();
@@ -106,6 +122,11 @@ async function sendDonation(donation) {
 
 async function getDonations(fundraiserId) {
     const result = await sendRequest("GET", "GetDonations?fundraiserId=" + fundraiserId);
+    return result;
+}
+
+async function getCurrentUserDonations() {
+    const result = await sendRequest("GET", "GetCurrentUserDonations");
     return result;
 }
 
@@ -205,5 +226,8 @@ export {
     getFundraiser,
     createFundraiser,
     sendDonation,
-    getDonations
+    getDonations,
+    updateUser,
+    updateUserPassword,
+    getCurrentUserDonations
 };

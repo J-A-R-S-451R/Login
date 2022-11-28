@@ -82,7 +82,7 @@ function FundraiserPage() {
                             )}
                         </div>
                     </div>
-                    <RecentDonations fundraiserId={fundraiserId} className="recent-donations-column"></RecentDonations>
+                    <RecentDonations fundraiserId={fundraiserId} mode="fundraiser" className="recent-donations-column"></RecentDonations>
                 </div>
             </Paper>
         </div>

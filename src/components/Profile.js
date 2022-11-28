@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Card, CardContent, Typography, CardMedia, CardActions, Divider, Input } from '@mui/material';
 import "../css/Profile.css";
@@ -12,11 +12,13 @@ import {
   MDBCardImage,
   MDBCardTitle
 } from 'mdb-react-ui-kit';
-import PersonIcon from '@mui/icons-material/Person';
+
 import { Button } from '@mui/material';
+import UserInfoCard from './UserInfoCard';
+import UserPasswordChangeCard from './UserPasswordChangeCard';
+import RecentDonations from './RecentDonations';
 
-
-export default function Profile({ fundraiser }) {
+export default function Profile() {
   return (
     <section>
       <MDBContainer className="py-5">
@@ -25,84 +27,40 @@ export default function Profile({ fundraiser }) {
           <MDBCol lg="4">
             <MDBCard className="mb-4">
               <MDBCardBody className="text-center">
-                <PersonIcon sx={{ width: "100px", height: "100px", backgroundColor: "gray", color: "white", borderRadius: "100%", marginBottom: "12px" }}></PersonIcon>
-                <MDBCard className="mb-4">
+                <MDBCard style={{ border: "none" }}>
                   <MDBCardBody>
-                    <MDBRow>
-                      <MDBCol sm="3">
-                        <MDBCardText>Full Name</MDBCardText>
-                      </MDBCol>
-                      <MDBCol sm="9">
-                        <MDBCardText>
-                          <Input placeholder="Full Name" value="Jonatan"></Input>
-                        </MDBCardText>
-                      </MDBCol>
-                    </MDBRow>
-                    <hr />
-                    <MDBRow>
-                      <MDBCol sm="3">
-                        <MDBCardText>Email</MDBCardText>
-                      </MDBCol>
-                      <MDBCol sm="9">
-                        <MDBCardText>
-                          <Input placeholder="Email" value="example@example.com"></Input>
-                        </MDBCardText>
-                      </MDBCol>
-                    </MDBRow>
-                    <hr />
-                    <MDBRow>
-                      <MDBCol sm="3">
-                        <MDBCardText>Address</MDBCardText>
-                      </MDBCol>
-                      <MDBCol sm="9">
-                        <MDBCardText>
-                          <Input placeholder="Address" value="Bay Area, San Francisco, CA"></Input>
-                        </MDBCardText>
-                      </MDBCol>
-                    </MDBRow>
+                    <UserInfoCard></UserInfoCard>
                   </MDBCardBody>
                 </MDBCard>
               </MDBCardBody>
             </MDBCard>
 
-            <MDBCard className="button">
-              <Button>Start A Fund</Button>
+            <MDBCard className="mb-4">
+              <MDBCardBody className="text-center">
+                <MDBCard style={{ border: "none" }}>
+                  <MDBCardBody>
+                    <UserPasswordChangeCard></UserPasswordChangeCard>
+                  </MDBCardBody>
+                </MDBCard>
+              </MDBCardBody>
             </MDBCard>
           </MDBCol>
+
           <MDBCol lg="8">
-
-
             <MDBRow>
               <MDBCol md="6">
                 <MDBCard className="mb-4 mb-md-0">
                   <MDBCardBody>
-                    <MDBCardText className="mb-4"><span className="text-primary font-italic me-1"> </span>Donated</MDBCardText>
-
-                    <MDBRow>
-                      <MDBCol>
-                        <MDBCardTitle className="mb-1" style={{ fontSize: '.77rem' }}>Family Johnson House Burnt Down </MDBCardTitle>
-                        <MDBCardText>$20.00</MDBCardText>
-                      </MDBCol>
-                    </MDBRow>
-                    <hr></hr>
-                    <MDBRow>
-                      <MDBCol>
-                        <MDBCardTitle className="mb-1" style={{ fontSize: '.77rem' }}>Lassie is Sick </MDBCardTitle>
-                        <MDBCardText>$20.00</MDBCardText>
-                      </MDBCol>
-                    </MDBRow>
-
+                    <MDBCardText className="mb-4">Your Donations</MDBCardText>
+                    <RecentDonations mode="user"></RecentDonations>
                   </MDBCardBody>
                 </MDBCard>
               </MDBCol>
 
-
-
-
               <MDBCol md="6">
                 <MDBCard className="mb-4 mb-md-0">
                   <MDBCardBody>
-                    <MDBCardText className="mb-4"><span className="text-primary font-italic me-1"></span> Donations</MDBCardText>
+                    <MDBCardText className="mb-4">Your Fundraisers</MDBCardText>
                     <Card sx={{ maxWidth: 345 }}>
                       <CardMedia
                         component="img"
@@ -124,6 +82,7 @@ export default function Profile({ fundraiser }) {
                   </MDBCardBody>
                 </MDBCard>
               </MDBCol>
+
             </MDBRow>
           </MDBCol>
         </MDBRow>

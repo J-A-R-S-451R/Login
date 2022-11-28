@@ -13,7 +13,7 @@ import { LoadingButton } from '@mui/lab';
 import { useNavigate, useParams } from 'react-router-dom'
 import { InputAdornment } from '@mui/material';
 import { useState } from 'react';
-import { sendDonation } from '../js/FundraiserAPI';
+import { sendDonation, useCurrentUser } from '../js/FundraiserAPI';
 
 export default function DonatePage() {
     const [errorMessage, setErrorMessage] = useState(null);
@@ -21,6 +21,7 @@ export default function DonatePage() {
     const [paymentType, setPaymentType] = useState("credit_card");
     const { fundraiserId } = useParams();
     const navigate = useNavigate();
+    const currentUser = useCurrentUser();
 
     function switchPaymentType(event) {
         setPaymentType(event.target.value);
@@ -112,6 +113,7 @@ export default function DonatePage() {
                             fullWidth
                             autoComplete="given-name"
                             variant="standard"
+                            defaultValue={currentUser?.firstName}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -123,6 +125,7 @@ export default function DonatePage() {
                             fullWidth
                             autoComplete="family-name"
                             variant="standard"
+                            defaultValue={currentUser?.lastName}
                         />
                     </Grid>
                     <Grid item xs={12} sm={12}>
@@ -201,6 +204,7 @@ export default function DonatePage() {
                             fullWidth
                             autoComplete="shipping address-line1"
                             variant="standard"
+                            defaultValue={currentUser?.addressStreet1}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -211,6 +215,7 @@ export default function DonatePage() {
                             fullWidth
                             autoComplete="shipping address-line2"
                             variant="standard"
+                            defaultValue={currentUser?.addressStreet2}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -222,6 +227,7 @@ export default function DonatePage() {
                             fullWidth
                             autoComplete="shipping address-level2"
                             variant="standard"
+                            defaultValue={currentUser?.addressCity}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -232,6 +238,7 @@ export default function DonatePage() {
                             label="State"
                             fullWidth
                             variant="standard"
+                            defaultValue={currentUser?.addressState}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -243,6 +250,7 @@ export default function DonatePage() {
                             fullWidth
                             autoComplete="shipping postal-code"
                             variant="standard"
+                            defaultValue={currentUser?.addressZip}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6} sx={{marginBottom: "24px"}}>
@@ -254,6 +262,7 @@ export default function DonatePage() {
                             fullWidth
                             autoComplete="shipping country"
                             variant="standard"
+                            defaultValue={currentUser?.addressCountry}
                         />
                     </Grid>
 

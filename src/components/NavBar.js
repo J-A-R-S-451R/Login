@@ -72,7 +72,10 @@ const ResponsiveAppBar = () => {
     },
     {
       name: "Logout",
-      callback: logout,
+      callback: () => {
+        logout();
+        navigate("/");
+      },
     }
   ];
 
