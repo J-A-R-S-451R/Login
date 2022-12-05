@@ -13,6 +13,8 @@ import {
   MDBCardTitle
 } from 'mdb-react-ui-kit';
 
+import { Link } from 'react-router-dom';
+
 import { Button } from '@mui/material';
 import UserInfoCard from './UserInfoCard';
 import UserPasswordChangeCard from './UserPasswordChangeCard';
@@ -61,24 +63,7 @@ export default function Profile() {
                 <MDBCard className="mb-4 mb-md-0">
                   <MDBCardBody>
                     <MDBCardText className="mb-4">Your Fundraisers</MDBCardText>
-                    <Card sx={{ maxWidth: 345 }}>
-                      <CardMedia
-                        component="img"
-                        alt="green iguana"
-                        height="140"
-                        image="https://media.istockphoto.com/photos/close-up-young-smiling-man-in-casual-clothes-posing-isolated-on-blue-picture-id1270987867?k=20&m=1270987867&s=612x612&w=0&h=lX9Y1qUxtWOa0W0Mc-SvNta00UH0-sgJQItkxfwE4uU=" />
-                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                          Help Pay for Ronny Funeral
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                          A tragic accident cost his life.
-                        </Typography>
-                      </CardContent>
-                      <CardActions>
-                        <Button size="small">Learn More</Button>
-                      </CardActions>
-                    </Card>
+
                   </MDBCardBody>
                 </MDBCard>
               </MDBCol>

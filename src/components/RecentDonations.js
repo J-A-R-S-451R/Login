@@ -45,7 +45,7 @@ function RecentDonations({ mode, fundraiserId }) {
                             return <DonationCard donation={x} showFundraiserDetails={mode === "user"}></DonationCard>
                         }))
                     : (
-                        <Typography>There haven't been any donations to this fundraiser yet.</Typography>
+                        (mode === "fundraiser" ? <Typography>There haven't been any donations to this fundraiser yet.</Typography> : <Typography>You haven't made any donations yet.</Typography>)
                 )) : (
                     <CircularProgress variant="indeterminate"></CircularProgress>
                 )
